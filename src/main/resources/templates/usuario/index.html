@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_MainLayout.html">
+
+<head>
+    <title>Usuarios</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <!-- Mensaje de confirmación -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+                title: 'Confirmación',
+                text: '[[${msg}]]',
+                icon: 'success'
+            });
+        </script>
+    </div>
+
+    <!-- Mensaje de error -->
+    <div th:if="${errorMsg != null}">
+        <script>
+            Swal.fire({
+                title: 'Error',
+                text: '[[${errorMsg}]]',
+                icon: 'error'
+            });
+        </script>
+    </div>
+    <div class="mb-3">
+        <a th:href="@{/usuarios/create}" class="btn btn-success">Nuevo Usuario</a>
+     </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${usuarios}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.login}"></td>
+            <td th:text="${item.status == 1 ? 'ACTIVO' : 'INACTIVO'}"></td>
+            <td>
+                <a th:href="@{/usuarios/details/{id}(id=${item.id})}" class="btn btn-secondary">Detalles</a> |
+                <a th:href="@{/usuarios/remove/{id}(id=${item.id})}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+     <!-- Paginación -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNum : ${pageNumbers}">
+                <a class="page-link" th:href="@{|/usuarios?page=${pageNum}|}" th:text="${pageNum}"></a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+</body>
+</html>

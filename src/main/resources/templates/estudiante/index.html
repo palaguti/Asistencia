@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html 
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="/layouts/_mainLayout.html">
+<head>
+    <title layout:fragment="title">Listado de Estudiante</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div th:if="${msg != null}">
+        <script>
+            swal({
+                title: "Confirmación",
+                text: "[[${msg}]]",
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null}">
+        <script>
+            swal({
+                title: "Error",
+                text: "[[${error}]]",
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <h2>Listado de Estudiante</h2>
+
+    <div class="mb-3">
+        <a th:href="@{/estudiantes/create}" class="btn btn-success">Nuevo Estudiante</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Codigo Estudiante</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="estudiante : ${estudiantes.content}">
+                <td th:text="${estudiante.id}"></td>
+                <td th:text="${estudiante.nombre}"></td>
+                <td th:text="${estudiante.apellido}"></td>
+                <td th:text="${estudiante.telefono}"></td>
+                <td th:text="${estudiante.codigo_estudiante}"></td>
+                <td>
+                    <a th:href="@{/estudiantes/view/{id}(id=${estudiante.id})}" class="btn btn-info btn-sm">Ver</a>
+                    <a th:href="@{/estudiantes/edit/{id}(id=${estudiante.id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a th:href="@{/estudiantes/delete/{id}(id=${estudiante.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav th:if="${pageNumbers != null}">
+        <ul class="pagination justify-content-center">
+            <li th:each="pageNum : ${pageNumbers}" class="page-item"
+                th:classappend="${pageNum == (estudiantes.number + 1)} ? 'active'">
+                <a class="page-link" th:href="@{/estudiantes(page=${pageNum}, size=${estudiantes.size})}" th:text="${pageNum}"></a>
+            </li>
+     </ul>
+    </nav>
+</section>
+</body>
+</html>

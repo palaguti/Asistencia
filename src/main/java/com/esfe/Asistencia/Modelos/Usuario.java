@@ -1,15 +1,11 @@
 package com.esfe.Asistencia.Modelos;
 
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.validation.constraints.NotBlank;
 
-
 import java.util.*;
 
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class Usuario {
@@ -26,7 +22,7 @@ public class Usuario {
 
     private int Status;
 
-    @ManyToAny(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol",
     joinColumns = @JoinColumn(name = "usuario_id"),
     inverseJoinColumns = @JoinColumn(name = "rol_id"))
@@ -63,4 +59,10 @@ public class Usuario {
         Roles = roles;
     }
 
+    public void agregar (Rol tempRol) {
+        if (Roles == null) {
+            Roles = new LinkedList<>();
+        }
+        Roles.add(tempRol);
+    }
 }
