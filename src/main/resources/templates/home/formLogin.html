@@ -1,53 +1,150 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    <link th:href="@{/css/login.min.css}" rel="stylesheet" />
+     <title>Login</title>
+     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+     <link th:href="@{/css/Login.css}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-2"></div>
-        <div class="col-lg-6 col-md-8 login-box">
-            <div class="col-lg-12 login-key">
-                <i class="fa fa-key" aria-hidden="true"></i>
-            </div>
-            <div class="col-lg-12 login-title">
-                ADMIN PANEL
-            </div>
 
-            <!-- Formulario de login -->
-            <div class="col-md-12 login-form">
+   <style>
+        /* Fondo  */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #160d57, #eb89d6);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Contenedor principal */
+        .login-box {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(139, 94, 212, 0.2);
+            text-align: center;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        /* Icono */
+        .login-kry i {
+            font-size: 50px;
+            color: #986cb1;
+            margin-bottom: 15px;
+        }
+
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #989898;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-control-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #989797;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border: 1px solid #4A90E2;
+            box-shadow: 0 0 5px rgba(74,144,226,0.5);
+        }
+
+        /* Botón */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-outline-primary {
+            background: #d27fd9;
+            border: none;
+            color: white;
+        }
+
+        .btn-outline-primary:hover {
+            background: #b865cb;
+        }
+
+        /* Mensajes de error o texto */
+        .login-text {
+            color: red;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* Ajustes de layout */
+        .loginbttm {
+            margin-top: 20px;
+        }
+    </style>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-lg-2"></div>
+            <div class="col-lg-6 col-lg-8 login-box">
+              <div class="col-lg-12 login-kry">
+                <i class="fa fa-key" aria-hidden="true"></i>
+              </div>
+              <div class="col-lg-12 login-title">
+                ADMIN PANEL
+              </div>
+
+              <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
                     <form th:action="@{/login}" method="post">
-                        <div class="form-group">
-                            <label class="form-control-label">Usuario</label>
-                            <input type="text" name="username" class="form-control" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-control-label">Clave</label>
-                            <input type="password" name="password" class="form-control" required/>
-                        </div>
-
-                        <div class="col-lg-12 loginbttm">
-                            <div class="col-lg-6 login-btm login-text">
-                                <!-- Aquí van mensajes de error -->
-                            </div>
-                            <div class="col-lg-6 login-btm login-button">
-                                <button type="submit" class="btn btn-outline-primary">LOGIN</button>
-                            </div>
-                        </div>
+                      <div class="form-group">
+                        <label class="form-control-label">Usuario</label>
+                        <input type="text" name="username" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label">Clave</label>
+                        <input type="password" name="password" class="form-control"/>
+                      </div>
+                    
+                      <div class="col-lg-12 loginbttm">
+                        <div class="col-lg-6 login-btm login-text">
+                           <!-- Erro Message-->
+                      </div>
+                      <div class="col-lg-6 login-btm login-button">
+                        <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+                      </div>
+                      </div>
                     </form>
                 </div>
+              </div>
+              <div class="col-lg-3 col-lg-2"></div>
             </div>
-
         </div>
-
-        <div class="col-lg-3 col-md-2"></div>
-    </div>
-</div>
 </body>
 </html>
